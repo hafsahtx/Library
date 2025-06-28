@@ -7,8 +7,16 @@ function Book(title,author,num_of_pages,read){
     this.num_of_pages = num_of_pages;
     this.read = read;
     this.info = function(){
-        return `${title} by ${author}, ${num_of_pages} pages, ${read}`;
+        return `${this.title} by ${this.author}, ${this.num_of_pages} pages, ${this.read}`;
     };
+    Book.prototype.book_status = function(status){
+        if (status===true){
+            this.read = "Read";
+        }else {
+            this.read = "Not read"
+         }
+        
+    }
 }
 
 function addBookToLibary(title,author,num_of_pages,read) {
@@ -16,11 +24,9 @@ function addBookToLibary(title,author,num_of_pages,read) {
     let book_id = crypto.randomUUID();
     book_object.book_id = book_id;
     myLibary.push(book_object);
-    if(title==="Of Mice in Men"){
-        console.log("added to libary");
-    }
     
 }
+
 
 
 function createCard(book){
@@ -32,6 +38,49 @@ function createCard(book){
     h4.textContent = book.title;
     let p = document.createElement("p");
     p.textContent = book.info();
+    const div = document.createElement("div");
+    div.classList.add("wrapper");
+    const toggle_wrapper = document.createElement("div");
+    toggle_wrapper.classList.add("toggle-wrapper");
+    const label = document.createElement("label");
+    label.classList.add("switch");
+    const input = document.createElement("input");
+    const span = document.createElement("span");
+    span.classList.add("slider", "round");
+    const spantext = document.createElement("span");
+    spantext.classList.add("label-text");
+    spantext.innerHTML = "Not Read";
+    input.setAttribute("type","checkbox"); 
+    input.setAttribute("id","toggleSwitch");
+    label.appendChild(input);
+    label.appendChild(span);   
+    if(book.read === "Read"){
+        input.checked = true;
+        spantext.innerHTML = "Read";
+
+    }else{
+        input.checked = false;
+        spantext.innerHTML = "Not read";
+    }
+    input.addEventListener("change",()=>{
+        let status;
+        if(input.checked){
+            status = true;
+            spantext.innerHTML = "Read";
+            book.book_status(status);
+            console.table(book);
+            p.textContent = book.info();
+            
+        }else{
+            status = false;
+            spantext.innerHTML = "Not read";
+            book.book_status(status);
+            p.textContent = book.info();
+            console.table(book);
+
+        }
+        
+    });
     let removeBtn = document.createElement("button");
     removeBtn.textContent = "Remove Book";
     removeBtn.classList.add("remove");
@@ -47,12 +96,14 @@ function createCard(book){
             myLibary.splice(index, 1);
         }
         index++;
-    }
-
-})
+    }});
+    toggle_wrapper.appendChild(label);
+    toggle_wrapper.appendChild(spantext);
+    div.appendChild(toggle_wrapper);
+    div.appendChild(removeBtn);
     card.appendChild(h4);
     card.appendChild(p);
-    card.appendChild(removeBtn);
+    card.appendChild(div);
     container.appendChild(card);
 }
 
@@ -68,10 +119,11 @@ function addNewBook(){
     const num_pages = document.getElementById("num_pages").value;
     const dropdown = document.getElementById("dropdown");
     const value = dropdown.value;
-    addBookToLibary(title,author,num_pages,value);
-    const container = document.querySelector(".container");
-    container.innerHTML = "";
-    displayBook(myLibary);
+    let book_object = new Book(title, author, num_pages,value);
+    let book_id = crypto.randomUUID();
+    book_object.book_id = book_id;
+    myLibary.push(book_object);
+    createCard(book_object);
 }
 
 function showDialog(){
@@ -99,13 +151,13 @@ function showDialog(){
 }
 
 
-addBookToLibary("Yellow Face", "R.F.Kuang", 450, "Yes");
-addBookToLibary("The Palace of Illusions","Chitra Banerjee", 360, "Not yet");
-addBookToLibary("The White Tiger", "Arvind Adiga", 276, "Yes");
-addBookToLibary("The Reaper and Angels", "Alden Bell", 205, "Not yet");
-addBookToLibary("Life of Pi","Yann Martel", 460, "Yes");
-addBookToLibary("Marmalade", "J.F Bob", 400, "Yes");
-addBookToLibary("The curious incident of the dog in the night-time", "Mark Haddon", 226, "Yes")
+addBookToLibary("Yellow Face", "R.F.Kuang", 450, "Read");
+addBookToLibary("The Palace of Illusions","Chitra Banerjee", 360, "Not read");
+addBookToLibary("The White Tiger", "Arvind Adiga", 276, "Read");
+addBookToLibary("The Reaper and Angels", "Alden Bell", 205, "Not read");
+addBookToLibary("Life of Pi","Yann Martel", 460, "Read");
+addBookToLibary("Marmalade", "J.F Bob", 400, "Not Read");
+addBookToLibary("The curious incident of the dog in the night-time", "Mark Haddon", 226, "Read")
 displayBook(myLibary);
 showDialog();
 
