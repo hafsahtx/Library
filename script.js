@@ -1,4 +1,5 @@
 const myLibary = [];
+const newbook = [];
 
 function Book(title,author,num_of_pages,read){
     this.title = title;
@@ -15,6 +16,9 @@ function addBookToLibary(title,author,num_of_pages,read) {
     let book_id = crypto.randomUUID();
     book_object.book_id = book_id;
     myLibary.push(book_object);
+    if(title==="Of Mice in Men"){
+        console.log("added to libary");
+    }
     
 }
 
@@ -37,6 +41,43 @@ function displayBook(arr){
     }
 }
 
+function addNewBook(){
+    const title = document.getElementById("title").value;
+    const author = document.getElementById("author").value;
+    const num_pages = document.getElementById("num_pages").value;
+    const dropdown = document.getElementById("dropdown");
+    const value = dropdown.value;
+    addBookToLibary(title,author,num_pages,value);
+    const container = document.querySelector(".container");
+    container.innerHTML = "";
+    displayBook(myLibary);
+}
+
+function showDialog(){
+    const showBtn = document.getElementById("add-book");
+    const submit = document.getElementById("confirmBtn");
+    const dialog = document.getElementById("dialog");
+    const cancel = document.getElementById("cancel");
+    const form = document.getElementById("myForm");
+    showBtn.addEventListener("click",()=>{
+        dialog.showModal();
+    });
+    submit.addEventListener("click", (e)=>{
+        e.preventDefault();
+        addNewBook();
+        form.reset();
+        dialog.close();
+    });
+    cancel.addEventListener("click",(e)=>{
+        e.preventDefault();
+        form.reset();
+        dialog.close();
+    });
+    
+    
+}
+
+
 addBookToLibary("Yellow Face", "R.F.Kuang", 450, "Yes");
 addBookToLibary("The Palace of Illusions","Chitra Banerjee", 360, "Not yet");
 addBookToLibary("The White Tiger", "Arvind Adiga", 276, "Yes");
@@ -45,3 +86,4 @@ addBookToLibary("Life of Pi","Yann Martel", 460, "Yes");
 addBookToLibary("Marmalade", "J.F Bob", 400, "Yes");
 addBookToLibary("The curious incident of the dog in the night-time", "Mark Haddon", 226, "Yes")
 displayBook(myLibary);
+showDialog();
