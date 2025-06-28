@@ -22,16 +22,37 @@ function addBookToLibary(title,author,num_of_pages,read) {
     
 }
 
+
 function createCard(book){
     let container = document.querySelector('.container');
     let card = document.createElement('div')
     card.classList.add("card");
+    card.setAttribute("data-book-id",book.book_id);
     let h4 = document.createElement('h4');
     h4.textContent = book.title;
     let p = document.createElement("p");
     p.textContent = book.info();
+    let removeBtn = document.createElement("button");
+    removeBtn.textContent = "Remove Book";
+    removeBtn.classList.add("remove");
+    removeBtn.setAttribute("data-book-id",book.book_id);
+    removeBtn.addEventListener("click",()=>{
+    let data = removeBtn.dataset.bookId;
+    let card = document.querySelector(`[data-book-id = "${data}"]`);
+    const container = document.querySelector(".container");
+    container.removeChild(card);
+    let index = 0;
+    for (let book in myLibary){
+        if (book.book_id == data){
+            myLibary.splice(index, 1);
+        }
+        index++;
+    }
+
+})
     card.appendChild(h4);
     card.appendChild(p);
+    card.appendChild(removeBtn);
     container.appendChild(card);
 }
 
@@ -87,3 +108,5 @@ addBookToLibary("Marmalade", "J.F Bob", 400, "Yes");
 addBookToLibary("The curious incident of the dog in the night-time", "Mark Haddon", 226, "Yes")
 displayBook(myLibary);
 showDialog();
+
+
