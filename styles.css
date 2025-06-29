@@ -1,11 +1,14 @@
 .card {
-    /* Add shadows to create the "card" effect */
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     width: 200px;
     height: 250px;
     padding: 8px;
     overflow: hidden;
+    background-color: rgb(246, 246, 246);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   
   /* On mouse-over, add a deeper shadow */
@@ -32,16 +35,16 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 200px;
    
 }
 #add-book{
-    background-color: #e7e7e7;
+    background-color: #88f755;
     color: black;
     font-size: 16px;
     padding: 12px 28px;
     border-radius: 12px;
-    border-color: #dcdbdbfe;
+    border-color: #89e831fe;
+    font-weight: 600;
 }
 .wrapper{
     display: flex;
@@ -51,6 +54,8 @@ h1{
     align-items: center;
     gap: 8px;
 }
+
+
 
 /* The switch - the box around the slider */
 .switch {
@@ -93,11 +98,11 @@ h1{
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #5df321;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #5df321;
 }
 input:checked + .slider:before {
     -webkit-transform: translateX(26px);
@@ -119,5 +124,59 @@ input:checked + .slider:before {
     align-items: center;
     gap: 10px;
   }
+.remove{
+  background-color: rgb(219, 10, 10);
+  color: white;
+  border: 1px solid rgb(219, 10, 10);
+  border-radius: 12px;
+  padding: 4px 12px;
+  font-weight: 600;
+}
+
+dialog {
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 1.6rem;
+  max-width: 400px;
+}
+
+form {
+  display: inline-block;
+  /* Form outline */
+  padding: 1em;
+}
+
+label {
+  /* Uniform size & alignment */
+  display: inline-block;
+  text-align: left;
+  margin-right: 8px;
+}
+
+p + p {
+  margin-top: 1em;
+}
+
+input[type="text"]{
+  font: 1em sans-serif;
+  /* Uniform text field size */
+  width: 200px;
+  box-sizing: border-box;
+  /* Match form field borders */
+  border: 1px solid #999;
+}
+
+
+#cancel, #confirmBtn{
+  background-color: gainsboro;
+  border: none;
+  color: black;
+  font-size: 1rem;
+  padding: 8px 12px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 
   
