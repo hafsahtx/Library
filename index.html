@@ -3,28 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Libarary</title>
+    <title>Library</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>My Libary</h1>
+    <h1>My Library</h1>
     <div class="container"></div>
     <dialog id="dialog">
         <form id="myForm">
+            <fieldset>
+                <legend>Enter Book Details</legend>
             <p>
-                <label for="title">Title</label>
+                <label for="title">Title:</label>
                 <input type="text" name="title" id="title">
             </p>
             <p>
-                <label for="author">Author</label>
+                <label for="author">Author:</label>
                 <input type="text" name="author" id="author">
             </p>
             <p>
-                <label for="num_pages">Number of Pages</label>
+                <label for="num_pages">Number of Pages:</label>
                 <input type="number" name="num_pages" id="num_pages">
             </p>
             <p>
-                <label for="read">Read</label>
+                <label for="read">Read Status:</label>
                 <select id="dropdown">
                     <option value="default">Choose...</option>
                     <option value="Read">Read</option>
@@ -35,10 +37,11 @@
                 <button id="cancel" type="cancel">Cancel</button>
                 <button id="confirmBtn" type="submit">Confirm</button>
             </div>
+        </fieldset>
         </form>
     </dialog>
     <div class="center">
-        <button id="add-book">New Book</button>
+        <button id="add-book">Add New Book</button>
     </div>
     <script src="script.js"></script>
 </body>
