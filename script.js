@@ -1,21 +1,22 @@
 const myLibary = [];
 const newbook = [];
 
-function Book(title,author,num_of_pages,read){
-    this.title = title;
-    this.author = author;
-    this.num_of_pages = num_of_pages;
-    this.read = read;
-    this.info = function(){
-        return `${this.title} by ${this.author}, ${this.num_of_pages} pages, ${this.read}`;
-    };
-    Book.prototype.book_status = function(status){
+class Book{
+    constructor(title,author,num_of_pages,read){
+        this.title = title;
+        this.author = author;
+        this.num_of_pages = num_of_pages;
+        this.read = read;
+        this.info = function(){
+            return `${this.title} by ${this.author}, ${this.num_of_pages} pages, ${this.read}`;
+        };
+    }
+    book_status(status){
         if (status===true){
             this.read = "Read";
         }else {
             this.read = "Not read"
          }
-        
     }
 }
 
